@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div>
+        <img class="profile-image" src="{{ image_file }}" alt="profile_pic">
+        <div>
+            <h1 class="mt-4 fw-bold">{{ current_user.username }}</h1>
+            <small>{{ current_user.email }}</small>
+        </div>
+    </div>
+    <div class="task-page">
+        <fieldset class="task-fieldset">
+            <legend class="mt-4"><h1>Your Tasks</h1></legend>
+            {% if tasks %}
+                {% for task in tasks %}
+                    <div class="tasks">
+                        <ul>
+                            <li>
+                                <div>{{ task.todo }}</div>
+                                <div>{{ task.description }}</div>
+                                <div>{{ task.date_posted.strftime('%Y-%m-%d') }}</div>
+
+                            </li>
+                        </ul>
+
+                        <a href="{{ url_for('update_task', task_id=task.id) }}"><button type="button" class="task-button">Update Task</button></a>
+
+                        <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post">
+                            <input type="submit" value="Delete" class="task-button">
+                        </form>
+                     </div>
+                {% endfor %}
+            {% endif %}
+            <div class="add-update">
+            <a href="{{ url_for('create_task') }}"><button type="button" class="task-button">Add Task</button></a>
+
+            <a href="{{ url_for('update_account') }}"><button type="button" class="task-button">Update Account</button></a>
+            </div>
+        </fieldset>
+
+
+    </div>
+
+
+{% endblock %}

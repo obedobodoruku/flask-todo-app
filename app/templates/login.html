@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <div class="form-group">
+        <fieldset class="form-fieldset w-100">
+            <legend><h1>Login</h1></legend>
+        <form method="post" action="">
+            {{ form.hidden_tag() }}
+
+            <div class="mt-3">{{ form.email.label }}</div>
+
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <span class="text-danger"><div>{{ form.email(class="form-control" ) }}</div>{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                <div>{{ form.email(class="form-control") }}</div>
+            {% endif %}
+
+            <div class="mt-3">{{ form.password.label }}</div>
+            {% if form.password.errors %}
+                {% for error in form.password.errors %}
+                    <span class="text-danger"><div>{{ form.password(class="form-control") }}</div>{{ error }}</span>
+                {% endfor %}
+            {% else %}
+                <div>{{ form.password(class="form-control") }}</div>
+            {% endif %}
+            <div class="form-check mt-3">
+                <div>{{ form.remember(class="form-check-input") }}</div>
+                <div>{{ form.remember.label(class="form-check-label") }}</div>
+            </div>
+            <div>{{ form.submit(class="btn btn-outline-primary mt-3 mb-4") }}</div>
+        </form>
+            <p>Don't have an Account? Register <a href="{{ url_for('register') }}">here</a></p>
+        </fieldset>
+    </div>
+
+{% endblock %}
+
+form-submit-button

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div>
+        <img class="profile-image" src="{{ image_file }}" alt="profile_pic">
+        <div>
+            <h1 class="mt-4 fw-bold">{{ current_user.username }}</h1>
+            <small>{{ current_user.email }}</small>
+        </div>
+    </div>
+    <div class="form-group">
+        <fieldset class="form-fieldset w-100">
+            <legend><h1>Update your Account</h1></legend>
+            <form method="post" action="" enctype="multipart/form-data">
+                {{ form.hidden_tag() }}
+
+                <div class="mt-3">{{ form.username.label }}</div>
+
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <span><div>{{ form.username(class="form-control") }}</div>{{ error }}</span>
+                    {% endfor %}
+                {% else %}
+                    <div>{{ form.username(class="form-control") }}</div>
+                {% endif %}
+
+                <div class="mt-3">{{ form.email.label }}</div>
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <span><div>{{ form.email(class="form-control") }}</div>{{ error }}</span>
+                    {% endfor %}
+                {% else %}
+                    <div>{{ form.email(class="form-control") }}</div>
+                {% endif %}
+
+                <div class="mt-3">{{ form.picture }}</div>
+                <div class="submit-add">
+                    <div>{{ form.submit(class="form-submit-button") }}</div>
+                    <a href="{{ url_for('account') }}"><button type="button" class="form-submit-button">Cancel</button> </a>
+                </div>
+            </form>
+
+        </fieldset>
+    </div>
+
+{% endblock %}
