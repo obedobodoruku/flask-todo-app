@@ -1,0 +1,6 @@
+COPYRIGHT SYMBOL:
+©
+https://api.themoviedb.org/3/trending/movie/
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
