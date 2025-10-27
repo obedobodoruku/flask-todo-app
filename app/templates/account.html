@@ -15,9 +15,19 @@
                 {% for task in tasks %}
                     <div class="tasks">
                         <ul>
-                            <li class="task-list">
-                                <label>
-                                    <input class="task-check" name="text-check" type="checkbox" >
+                            <li class="task-list" data-id="{{ task.id }}">
+                                <label 
+                                {% if task.completed %}
+                                 style="text-decoration: line-through;"
+                                {% else %}
+                                 style="text-decoration: none;"
+                                {% endif %} >
+                                    <input class="task-check"
+                                     name="text-check"
+                                      type="checkbox"
+                                      {% if task.completed %}
+                                        checked
+                                      {% endif %}  >
                                     {{ task.todo }}
                                     {{ task.description }}
                                     

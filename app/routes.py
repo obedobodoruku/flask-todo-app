@@ -1,7 +1,7 @@
 import os
 import secrets
 from PIL import Image
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, jsonify
 from app import app, db, bcrypt
 from app.models import User, Task
 from flask_login import login_user, current_user, login_required, logout_user
@@ -131,4 +131,12 @@ def delete_task(task_id):
         db.session.delete(task)
         db.session.commit()
         return redirect(url_for("account", task_id=task.id))
+    
+@app.route("/complete/<int:id>", methods=["POST"])
+def toggle_complete(id):
+    task = Task.query.get_or_404(id)
+    data = request.get_json()
+    task.completed = data.get("completed", False)
+    db.session.commit()
+    return jsonify({"succes": True, "completed": task.completed}, 201)
 
