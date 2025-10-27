@@ -15,10 +15,14 @@
                 {% for task in tasks %}
                     <div class="tasks">
                         <ul>
-                            <li>
-                                <div>{{ task.todo }}</div>
-                                <div>{{ task.description }}</div>
-                                <div>{{ task.date_posted.strftime('%Y-%m-%d') }}</div>
+                            <li class="task-list">
+                                <label>
+                                    <input class="task-check" name="text-check" type="checkbox" >
+                                    {{ task.todo }}
+                                    {{ task.description }}
+                                    
+                                </label>
+                                <div>({{ task.date_posted.strftime('%Y-%m-%d') }})</div>
 
                             </li>
                         </ul>
